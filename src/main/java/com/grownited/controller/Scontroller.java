@@ -3,6 +3,8 @@ package com.grownited.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class Scontroller {
@@ -24,7 +26,17 @@ public class Scontroller {
 	 
 	 @PostMapping("saveuser")
 	 public String saveUser() {
-			return "Login";//jsp
+			return "Login";//jsp page
+		}
+	 
+	 @PostMapping("sendotp")
+	 public String changepassword() {
+	 	return "ChangePassword";
+	 }
+	 
+	 @PostMapping("updatepassword")
+		public String updatePassword() {
+			return "Login";
 		}
 	 
 	 

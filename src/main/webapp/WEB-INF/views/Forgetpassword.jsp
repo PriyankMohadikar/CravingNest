@@ -8,14 +8,17 @@
 </head>
 <body>
 
-	<form action="saveuser" method="post">
+	<!-- After giving email id then it send Otp via email and  navigate to ChangePassword page
+ -->
+	<form action="sendotp" method="post">
 		<div>
 			<label for="email"> Email :</label> <input type="text" name="email"
 				id="email">
 		</div>
 		<div>
-			<button type="submit">Submit</button>
-			<a href="login">Return to login</a>
+
+			<a href="login">Return to login</a> <input type="submit"
+				value="Send Otp" />
 		</div>
 	</form>
 </body>
