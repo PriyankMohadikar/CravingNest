@@ -11,12 +11,12 @@
 	<form action="saveuser" method="post">
 		<div>
 			<label for="firstname"> FirstName :</label> <input type="text"
-				name="firstname" id="firstname">
+				name="firstName" id="firstName">
 		</div>
 		<br>
 		<div>
 			<label for="lastname"> LastName :</label> <input type="text"
-				name="lastname" id="lastname">
+				name="lastName" id="lastName">
 		</div>
 		<br>
 		<div>
@@ -25,10 +25,16 @@
 		</div>
 		<br>
 		<div>
-			<label for="email"> Email :</label> <input type="text"
-				name="email" id="email">
+			<label for="email"> Email :</label> <input type="text" name="email"
+				id="email">
 		</div>
 		<br>
+		<div>
+		<label for="gender"> Gender :</label>
+		 Male<input type="radio" name="gender" value="male">
+		 Female<input type="radio" name="gender" value="female"> 
+		</div> 
+			<br>
 		<div>
 			<label for="password"> PassWord :</label> <input type="password"
 				id="password" name="password">
@@ -40,10 +46,11 @@
 		</div>
 		<br> &nbsp;
 		<button type="submit">Submit</button>
-		
-</form>
-<br><br>
-&nbsp;	&nbsp;	&nbsp;	
-		<a href="login"><button>Login</button></a>
+
+	</form>
+	<br>
+	<br> &nbsp; &nbsp; &nbsp;
+	<h3>Already created account?</h3>
+	<a href="login"><button>Login</button></a>
 </body>
 </html>
