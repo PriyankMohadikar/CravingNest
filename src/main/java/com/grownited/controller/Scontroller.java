@@ -31,9 +31,14 @@ public class Scontroller {
 		System.out.println(userentity.getLastName());
 		System.out.println(userentity.getEmail());
 		System.out.println(userentity.getContact());
-		System.out.println(userentity.getPassword());
 		System.out.println(userentity.getGender());
+		System.out.println(userentity.getPassword());
 		return "Login";// jsp page
+	}
+
+	@PostMapping("gotostate")
+	public String gotostate() {
+		return "Newstate";
 	}
 
 	@PostMapping("sendotp")

@@ -10,7 +10,7 @@
 <h1>
 Login page
 </h1>
-<form action="saveuser">
+<form action="gotostate" method="post">
 	<br>
 		<div>
 			<label for="email"> Email :</label> <input type="text"
@@ -23,7 +23,8 @@ Login page
 		</div>
 		<br>
 		<a href="forgetpassword">Forget Password</a>
-</form>
 	<button type="submit">Login</button>
+</form>
+	<a href="addstate">Add State</a>
 </body>
 </html>
