@@ -25,6 +25,5 @@ public class Statecontroller {
 		System.out.println(state.getStateName());
 		repoState.save(state);
 		return "Newstate";
-
 	}
 }

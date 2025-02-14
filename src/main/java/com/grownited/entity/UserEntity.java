@@ -1,5 +1,8 @@
 package com.grownited.entity;
 
+import java.util.Date;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,10 +20,13 @@ public class UserEntity {
 	private String lastName;
 	private String contact;
 	private String gender;
+	@Column(unique = true)
 	private String email; 
 	private String password;
-	private String city;
+//	private String city;
 	private String role;
+	private boolean isactive;
+	private Date createdAt;
 	
 	
 	public Integer getUserId() {
@@ -65,17 +71,24 @@ public class UserEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
+	
 	public String getRole() {
 		return role;
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public boolean getIsactive() {
+		return isactive;
+	}
+	public void setIsactive(boolean isactive) {
+		this.isactive = isactive;
 	}
 	
 	
