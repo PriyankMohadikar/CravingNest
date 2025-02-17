@@ -1,9 +1,11 @@
 package com.grownited.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +33,13 @@ public class Scontroller {
 	@GetMapping("forgetpassword")
 	public String forgetpassword() {
 		return "Forgetpassword"; // return should match the jsp page NAME
+	}
+
+	@GetMapping("listuser")
+	public String viewuser(Model model) {
+		List<UserEntity> userlist = repoUser.findAll();
+		model.addAttribute("userlist", userlist);
+		return "Listuser";
 	}
 
 	// create global object for Repository for insertion in UserEntity(users table)
