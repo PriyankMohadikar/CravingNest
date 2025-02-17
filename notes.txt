@@ -1,0 +1,104 @@
+Table Name =state		
+                stateId		
+                stateName		
+
+Table Name =city		
+                cityId		
+                cityName		
+		
+Table Name = area		
+                areaId	integer	
+                areaName	string	
+                cityId	integer | dropdow	city FK 
+		
+Table Name = location		same as area
+                Integer locationId;	1	
+                String title;	Ajay's	
+                String category;	fast food 	
+                String description;	xxxxx	
+                String timings;	morning : 9-11 even 5-7  night 9-1	
+                boolean active;		
+		
+                String contactNumber;		
+                String address;		
+                Integer cityId;	FK	dropdown
+                Integer areaId;	FK	dropdown
+                foodType: string		
+                double latitude;		
+                double longitude;		
+		
+Table Name = users		
+                userId	int	CRUD
+                firstname		
+                lastname		
+                gender		
+                contact		
+                email		
+                password		
+                age		
+                profilePicPath		
+		
+Table Name = offers		same as area 
+            Integer offerId;		
+            String title;		
+            String description;		
+            boolean active;		
+            Date startDate;		
+            Date endDate;		
+            Integer locationId;	FK	
+            foodType: string	burger , pizza , pasta 	
+		
+Table Name = ratings		
+            ratingsId	PK	
+            offerId	FK: Offer	
+            comments	awesome , burger specific  ,	
+            rating	3-4-5-1-2	1 to 5
+---------------------------------------------------------------------
+            list logic 
+
+	1) controller -> @Getmapping("listmember")
+	2) public String listMember(){
+			return "ListMember";//jsp name 
+		} 	
+	3) create a jsp -> WEB-INF/views/ListMember.jsp 
+	
+	4) get all the data from database to controller 
+	   we will use repository -> finaAll() method 
+	    public String listMember(){
+		List<MemberEntity> memberList = repositoryMember.findAll(); // read all members from db to controller 
+			return "ListMember";//jsp name 
+		}
+	
+	5) how to send data from controller to jsp 
+		//Model 
+		model.addAttribute("memberList", memberList);
+						//dataName , dataValue 
+		
+		public String listMember(){
+		    List<MemberEntity> memberList = repositoryMember.findAll(); // read all members from db to controller 
+			model.addAttribute("memberList", memberList);
+			return "ListMember";//jsp name 
+		}
+		
+	6) get for loop print 
+		
+	
+	
+	
+---------------------------------------------------------------
+JSTL  java standard tag lib --> 
+	core********* 
+	sql
+	xml
+	fmt
+		core tag 
+				if** 
+				case 
+				catch 
+				out 
+				set
+				forEach** 
+				forToken
+				
+---------------------------------------------------------------				
+	
