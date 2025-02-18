@@ -13,21 +13,21 @@
 <body>
 	<h1>ListUser</h1>
 	<table border=1>
-		<thead>
+		<tr>
 			<th>FirstName</th>
 			<th>LastName</th>
 			<th>Email</th>
 			<th>Gender</th>
 			<th>Role</th>
 			
-		</thead>
-		<c:forEach items="${userlist}" var="u">
+		</tr>
+		<c:forEach items="${userlist}" var="user">
 			<tr>
-				<td>${u.firstName }</td>
-				<td>${u.lastName}</td>
-				<td>${u.email }</td>
-				<td>${u.gender }</td>
-				<td>${u.role }</td>
+				<td>${user.firstName }</td>
+				<td>${user.lastName}</td>
+				<td>${user.email }</td>
+				<td>${user.gender }</td>
+				<td>${user.role }</td>
 			</tr>
 		</c:forEach>
 	</table>

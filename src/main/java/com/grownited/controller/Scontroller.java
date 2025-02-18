@@ -1,5 +1,6 @@
 package com.grownited.controller;
 
+//import java.net.http.HttpClient;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.grownited.entity.UserEntity;
 import com.grownited.repository.UserRepository;
+import com.grownited.service.MailService;
 
 @Controller
 public class Scontroller {
@@ -19,6 +21,10 @@ public class Scontroller {
 	// Global Repository user created
 	@Autowired
 	UserRepository repoUser;
+
+	// MailService Class object--globally
+	@Autowired
+	MailService serviceMail;
 
 	@GetMapping("login")
 	public String login() {
@@ -50,17 +56,15 @@ public class Scontroller {
 		// Role name Should always in Caps
 		userentity.setRole("USER");
 		userentity.setIsactive(true);
-		System.out.println(userentity.getFirstName());
-		System.out.println(userentity.getLastName());
-		System.out.println(userentity.getEmail());
-		System.out.println(userentity.getContact());
-		System.out.println(userentity.getGender());
-		System.out.println(userentity.getPassword());
-		System.out.println(userentity.getCreatedAt());
-		System.out.println(userentity.getIsactive());
-		System.out.println(userentity.getRole());
+//		System.out.println(userentity.getFirstName());
+//		System.out.println(userentity.getLastName());
+
+		// save user to database in users table
 		repoUser.save(userentity);
-		return "Login";// jsp page
+		// mail logic -> Welcome Mail to given mail(usermail)
+		serviceMail.sendWelcomemail(userentity.getEmail(), userentity.getFirstName());
+		
+		return "Login";// Same name As JSP page
 	}
 
 	@PostMapping("gotostate")

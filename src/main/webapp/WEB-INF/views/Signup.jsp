@@ -9,6 +9,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+
 <script>
         function toggleDarkMode() {
             document.body.classList.toggle("bg-dark");
@@ -17,7 +18,9 @@
             formElements.forEach(el => el.classList.toggle("bg-dark"));
             formElements.forEach(el => el.classList.toggle("text-white"));
         }
+      
     </script>
+
 </head>
 <body class="bg-dark text-white">
 	<div class="container mt-5">
