@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,6 @@ import com.grownited.service.MailService;
 
 @Controller
 public class Scontroller {
-
 	// Global Repository user created
 	@Autowired
 	UserRepository repoUser;
@@ -26,6 +26,10 @@ public class Scontroller {
 	@Autowired
 	MailService serviceMail;
 
+	// Encryption of password using Bcrypt
+	@Autowired
+	PasswordEncoder encoder;
+	
 	@GetMapping("login")
 	public String login() {
 		return "Login";
@@ -56,12 +60,14 @@ public class Scontroller {
 		// Role name Should always in Caps
 		userentity.setRole("USER");
 		userentity.setIsactive(true);
-//		System.out.println(userentity.getFirstName());
-//		System.out.println(userentity.getLastName());
-
-		// save user to database in users table
+		
+		//logic for Password Encryption
+		String encPassword = encoder.encode(userentity.getPassword());
+		userentity.setPassword(encPassword);
+		
+		// #save user to database in users table
 		repoUser.save(userentity);
-		// mail logic -> Welcome Mail to given mail(usermail)
+		// #mail logic -> Welcome Mail to given mail(usermail)
 		serviceMail.sendWelcomemail(userentity.getEmail(), userentity.getFirstName());
 		
 		return "Login";// Same name As JSP page
