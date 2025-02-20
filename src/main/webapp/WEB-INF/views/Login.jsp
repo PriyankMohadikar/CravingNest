@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- URI for JSTL which Support Java tab library -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +26,7 @@
             <div class="col-md-4">
                 <div class="card p-4 shadow-lg">
                     <h2 class="text-center text-dark">Login</h2>
-                    <form action="gotostate" method="post">
+                    <form action="authenticate" method="post">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email:</label>
                             <input type="email" class="form-control" name="email" id="email" required>
@@ -40,12 +42,14 @@
                     </form>
                     
                     <div class="text-center mt-3">
+					    ${error}
                         <button class="btn btn-dark" onclick="toggleDarkMode()">Toggle Dark Mode</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

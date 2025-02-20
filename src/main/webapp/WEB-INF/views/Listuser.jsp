@@ -19,6 +19,8 @@
 			<th>Email</th>
 			<th>Gender</th>
 			<th>Role</th>
+			<th>Actions</th>
+			
 			
 		</tr>
 		<c:forEach items="${userlist}" var="user">
@@ -28,6 +30,8 @@
 				<td>${user.email }</td>
 				<td>${user.gender }</td>
 				<td>${user.role }</td>
+				<td><a href="viewuser?userId=${user.userId}">View</a> | <a href="deleteuser?userId=${user.userId}">Delete</a> | <a href="edituser">Update</a></td>
+				
 			</tr>
 		</c:forEach>
 	</table>

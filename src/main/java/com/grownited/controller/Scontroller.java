@@ -1,8 +1,6 @@
 package com.grownited.controller;
 
-//import java.net.http.HttpClient;
-import java.util.Date;
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.grownited.entity.UserEntity;
 import com.grownited.repository.UserRepository;
-import com.grownited.service.MailService;
+
 
 @Controller
 public class Scontroller {
@@ -22,9 +20,6 @@ public class Scontroller {
 	@Autowired
 	UserRepository repoUser;
 
-	// MailService Class object--globally
-	@Autowired
-	MailService serviceMail;
 
 	// Encryption of password using Bcrypt
 	@Autowired
@@ -45,33 +40,7 @@ public class Scontroller {
 		return "Forgetpassword"; // return should match the jsp page NAME
 	}
 
-	@GetMapping("listuser")
-	public String viewuser(Model model) {
-		List<UserEntity> userlist = repoUser.findAll();
-		model.addAttribute("userlist", userlist);
-		return "Listuser";
-	}
 
-	// create global object for Repository for insertion in UserEntity(users table)
-
-	@PostMapping("saveuser")
-	public String saveUser(UserEntity userentity) {
-		userentity.setCreatedAt(new Date());
-		// Role name Should always in Caps
-		userentity.setRole("USER");
-		userentity.setIsactive(true);
-		
-		//logic for Password Encryption
-		String encPassword = encoder.encode(userentity.getPassword());
-		userentity.setPassword(encPassword);
-		
-		// #save user to database in users table
-		repoUser.save(userentity);
-		// #mail logic -> Welcome Mail to given mail(usermail)
-		serviceMail.sendWelcomemail(userentity.getEmail(), userentity.getFirstName());
-		
-		return "Login";// Same name As JSP page
-	}
 
 	@PostMapping("gotostate")
 	public String gotostate() {
@@ -88,4 +57,23 @@ public class Scontroller {
 		return "Login";
 	}
 
+	// Authentication Logic
+	@PostMapping("authenticate")
+	public String authuser(String email,String password,Model model) {
+		
+		    Optional<UserEntity> op = repoUser.findByEmail(email);
+//		    op -> select * from users where email = "email" and password = "password";
+		    if(op.isPresent()) {
+		    	
+		    	UserEntity dbuser = op.get();
+		    	if(encoder.matches(password, dbuser.getPassword())) {
+//		    		return "redirect:/home";
+		    		return "Home";
+		    	}
+		    }
+		model.addAttribute("error","Invalid Credentials");   
+		return "Login";
+	}
+	
+	
 }

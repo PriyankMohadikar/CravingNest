@@ -122,7 +122,8 @@ Table Name = ratings
 -----------------------------------------------------------
 
 #Redirect logic :
-	After saving details(from form then to navigate we use redirect(use URL) to another jsp)
+	After saving details(from form then to navigate we use redirect(use URL)(Have controller url name) to another jsp)
+	Shift to another url
 -> return "redirect:/login";				
 
 ----------------------------------------------------------
@@ -158,5 +159,13 @@ how to encode password using bcrypt
 	userEntity.setPassword(encPassword);	
 		
 ----------------------------------------------------------
+# how to delete and View Data by Id 
+20/2
+First View -- findById(userId) -- optional For nullpointerException
+Delete User -- deleteById(userId)
+
+
+
+
 
 	
