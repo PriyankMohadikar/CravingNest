@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    <!-- URI for JSTL which Support Java tab library -->
+	pageEncoding="UTF-8"%>
+
+<!-- URI for JSTL which Support Java tab library -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -10,15 +10,13 @@
 <title>View User</title>
 </head>
 <body>
-<h1>View User Details</h1>
+	<h1>View User Details</h1>
 
-<h3>
-First Name : ${user.firstName} <br>
-Last Name : ${user.lastName} <br>
-Email : ${user.email} <br>
-Gender : ${user.gender} <br>
-Role : ${user.role}
-</h3>
+	<p class="text-secondary text-center">
+		First Name : ${user.firstName} <br> Last Name : ${user.lastName}
+		<br> Email : ${user.email} <br> Gender : ${user.gender} <br>
+		Role : ${user.role}
+	</p>
 
 </body>
 </html>

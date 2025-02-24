@@ -42,7 +42,8 @@ public class Usercontroller {
 	@GetMapping("viewuser")
 	public String viewuserdetails(Integer userId,Model model) {
 		System.out.println("User Id :" + userId);
-			Optional<UserEntity> op	=	repoUser.findById(userId);
+		// optional for NullPointerException
+			Optional<UserEntity> op	= repoUser.findById(userId);
 			if(op.isPresent()) {
 				UserEntity user = op.get();
 				model.addAttribute("user",user);
@@ -55,6 +56,11 @@ public class Usercontroller {
 	public String deleteuserdetails(Integer userId) {
 		repoUser.deleteById(userId);
 		return "redirect:/listuser";
+	}
+	
+	@GetMapping("home")
+	public String home() {
+		return "Home";
 	}
 
 	@PostMapping("saveuser")

@@ -42,7 +42,7 @@
                     </form>
                     
                     <div class="text-center mt-3">
-					    ${error}
+					    ${error}   ${errors}
                         <button class="btn btn-dark" onclick="toggleDarkMode()">Toggle Dark Mode</button>
                     </div>
                 </div>
