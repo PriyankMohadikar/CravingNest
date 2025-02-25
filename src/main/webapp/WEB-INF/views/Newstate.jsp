@@ -27,7 +27,9 @@
 						<button type="submit" class="btn btn-primary w-100">Add
 							State</button>
 					</form>
-
+					<h4>
+					<a href="addcity">AddCity</a>
+					</h4> 
 				</div>
 			</div>
 		</div>
