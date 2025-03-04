@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.grownited.entity.UserEntity;
 import com.grownited.repository.UserRepository;
+import com.grownited.service.MailService;
 
 import jakarta.mail.Session;
 import jakarta.servlet.http.HttpSession;
@@ -25,6 +26,9 @@ public class Scontroller {
 	// Encryption of password using Bcrypt
 	@Autowired
 	PasswordEncoder encoder;
+	
+	@Autowired
+	MailService serviceMail;
 
 	@GetMapping("login")
 	public String login() {
@@ -46,17 +50,52 @@ public class Scontroller {
 		return "Newstate";
 	}
 
+	
+	// Create sendOtpForPassword for generating otp in mailservice class
 	@PostMapping("sendotp")
-	public String changepassword() {
-		return "ChangePassword";
+	public String changepassword(String email,HttpSession session) {
+		Optional<UserEntity> op = repoUser.findByEmail(email);
+		if(op.isEmpty()) {
+			return "ChangePassword";
+		}else {
+			String otp = serviceMail.sendOtpForPassword(email);
+			session.setAttribute("otp", otp);
+			session.setAttribute("email",email);
+			return "ChangePassword";
+		}
 	}
 
+	// First check mail and match otp from mail and user enterd otp with equals method 
 	@PostMapping("updatepassword")
-	public String updatePassword() {
+	public String updatePassword(String email,String otp,String password,HttpSession session,Model model) {
+		Optional<UserEntity> op = repoUser.findByEmail(email);
+		if(op.isEmpty()) {
+			model.addAttribute("error", "Invalid Data");
+			return "ChangePassword";
+		}else {
+			UserEntity user = op.get();
+			Object storedOtp = session.getAttribute("otp");
+			System.out.println(storedOtp);
+			if(storedOtp != null && storedOtp.equals(otp)) {
+				String encPassword = encoder.encode(password);
+				user.setPassword(encPassword);
+				repoUser.save(user);
+				session.removeAttribute(otp);
+				session.removeAttribute(email);
+				
+			}else {
+
+				model.addAttribute("error", "Invalid Data");
+				return "ChangePassword";
+			}
+		}
 		return "Login";
 	}
 
-	// Authentication Logic
+	
+	
+	
+	// Authentication(login) Logic  
 	@PostMapping("authenticate")
 	public String authuser(String email, String password, Model model, HttpSession session) {
 
@@ -76,7 +115,6 @@ public class Scontroller {
 					model.addAttribute("errors", "Please Contact admin for error code #0991");
 					return "redirect:/login";
 				}
-//		    		return "Home";
 			}
 		}
 		model.addAttribute("error", "Invalid Credentials");
