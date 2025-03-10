@@ -226,11 +226,18 @@ Delete User -- deleteById(userId)
 		and invalidate session.
 =========================================================================================================		
 		
+## Join City and State table	
 		
-		
-			
+  **Using Concept Data transfer object and custom query
+	  -first create custom query in cityrepository
+		@Query(value = "select c.*,s.state_Name from cities c,state s where c.state_id = s.state_id",nativeQuery = true)
+		List<Citydto> getAll();
 
-
+	**And Creating Citydto in dto folder with city data fields and stateId fK and constructor
+		and in citycontroller
+				List<Citydto> city = repocity.getAll();
+				model.addAttribute("city", city);
+==================================================================================
 
 
 

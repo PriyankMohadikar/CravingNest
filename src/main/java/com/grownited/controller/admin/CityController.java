@@ -25,6 +25,7 @@ public class CityController {
 
 	@GetMapping("addcity")
 	public String city(Model model) {
+		// state name list for selecting state for respected city name in dropdown option
 		List<StateEntity> allstate = repoState.findAll();
 		model.addAttribute("allstate", allstate);
 		return "NewCity";
@@ -32,6 +33,7 @@ public class CityController {
 	
 	@GetMapping("listcity")
 	public String listcity(Model model) {
+		// for join cities and state table using custom query in city repository(DATA TRANSFER OBJECT - DTO)
 		List<Citydto> city = repocity.getAll();
 		model.addAttribute("city", city);
 		return "Listcity";
