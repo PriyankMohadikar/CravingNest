@@ -36,7 +36,7 @@
                 <div class="signup-box p-4 shadow-lg">
 			     <h1 class="text-center mb-4">Craving<span class="text-warning">Nest</span></h1>
                     <h3 class="text-center mb-4">Sign Up</h3>
-                    <form action="saveuser" method="post">
+                    <form action="saveuser" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="firstName" class="form-label"><i class="fas fa-user me-2"></i>First Name:</label>
                             <input type="text" class="form-control" name="firstName" id="firstName" required>
@@ -61,6 +61,12 @@
                                 <input type="radio" name="gender" value="female" required class="ms-3"> 
                                 <i class="fas fa-venus me-1"></i>Female
                             </div>
+                        </div>
+                        <div class="mb-3">
+                         <label for="profilePic" class="form-label"><i class="fa-solid fa-user"></i> Profile:</label>
+                        <input type="file" class="form-control" placeholder="Profile"
+								name="profilePic" />
+							
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label"><i class="fas fa-lock me-2"></i>Password:</label>

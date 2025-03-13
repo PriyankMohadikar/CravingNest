@@ -112,7 +112,7 @@ public class Scontroller {
 				} else if (dbuser.getRole().equals("USER")) {
 					return "redirect:/home";
 				} else {
-					model.addAttribute("errors", "Please Contact admin for error code #0991");
+					model.addAttribute("errors", "Please Contact admin for errors code #0991");
 					return "redirect:/login";
 				}
 			}

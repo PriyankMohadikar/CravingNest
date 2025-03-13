@@ -52,9 +52,14 @@
 			</a></li>
 			<!-- End Register Page Nav -->
 
-			<li class="nav-item"><a class="nav-link collapsed" href="login">
-					<i class="bi bi-box-arrow-in-right"></i> <span>Login</span>
+			<li class="nav-item"><a class="nav-link collapsed" href="addlocation">
+					<i class="bi bi-box-arrow-in-right"></i> <span>Add Food & location</span>
 			</a></li>
+			
+			<li class="nav-item"><a class="nav-link collapsed" href="listoffer">
+					<i class="bi bi-box-arrow-in-right"></i> <span>Current Offers</span>
+			</a></li>
+			
 			<!-- End Login Page Nav -->
 			<li class="nav-item"><a class="nav-link collapsed" href="logout">
 					<i class="bi bi-box-arrow-in-right"></i> <span>Sign Out</span>

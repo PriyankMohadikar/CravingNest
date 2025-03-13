@@ -16,7 +16,7 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-@Component
+//@Component
 public class LoginFilterCheck implements Filter {
 
 	ArrayList<String> publicURL = new ArrayList<>();
@@ -25,6 +25,7 @@ public class LoginFilterCheck implements Filter {
 		publicURL.add("/");
 		publicURL.add("/login");
 		publicURL.add("/signup");
+//		publicURL.add("/saveuser");
 		publicURL.add("/forgetpassword");
 		publicURL.add("/updatepassword");
 		publicURL.add("/sendotp");
@@ -40,20 +41,20 @@ public class LoginFilterCheck implements Filter {
 
 		String url = req.getRequestURL().toString();
 		String uri = req.getRequestURI();
-		System.out.println("Filter calling " + uri);
+//		System.out.println("Filter calling " + uri);
 
 		if (publicURL.contains(uri) || uri.contains(".css") || uri.contains(".js") || uri.contains("images")) {
-			System.out.println("Public URL");
+//			System.out.println("Public URL");
 			chain.doFilter(request, response);
 		} else {
 			HttpSession session = req.getSession();
 			UserEntity user = (UserEntity) session.getAttribute("user");
 			System.out.println(user);
 			if (user == null) {
-				System.out.println("No usr");
+//				System.out.println("No usr");
 				req.getRequestDispatcher("login").forward(request, response);
 			} else {
-				System.out.println("User Present");
+//				System.out.println("User Present");
 				chain.doFilter(request, response);
 			}
 		}//if_else_main

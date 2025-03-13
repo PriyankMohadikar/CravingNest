@@ -1,7 +1,9 @@
 package com.grownited.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.grownited.entity.UserEntity;
 import com.grownited.repository.UserRepository;
 import com.grownited.service.MailService;
@@ -29,6 +34,9 @@ public class Usercontroller {
 	// Encryption of password using Bcrypt
 	@Autowired
 	PasswordEncoder encoder;
+	
+	@Autowired
+	Cloudinary cloudinary;
 
 	// View All data
 	@GetMapping("listuser")
@@ -58,25 +66,36 @@ public class Usercontroller {
 		return "redirect:/listuser";
 	}
 	
-	@GetMapping("home")
-	public String home() {
-		return "Home";
-	}
+	
 
 	@PostMapping("saveuser")
-	public String saveUser(UserEntity userentity) {
+	public String saveUser(UserEntity userentity,MultipartFile profilePic) {
+		
+//		System.out.println(profilePic.getOriginalFilename());
+		try {
+			Map result = cloudinary.uploader().upload(profilePic.getBytes(), ObjectUtils.emptyMap());
+			//System.out.println(result);
+			System.out.println(result.get("url"));
+			userentity.setProfilePicPath(result.get("url").toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		userentity.setCreatedAt(new Date());
+		
 		// Role name Should always in Caps
 		userentity.setRole("USER");
 		userentity.setIsactive(true);
-
-		// logic for Password Encryption
+// Profile path in userentity
+		
+	// logic for Password Encryption
 		String encPassword = encoder.encode(userentity.getPassword());
 		userentity.setPassword(encPassword);
 
 		// #save user to database in users table
 		repoUser.save(userentity);
-		// #mail logic -> Welcome Mail to given mail(usermail)
+		
+	// #mail logic -> Welcome Mail to given mail(usermail)
 		serviceMail.sendWelcomemail(userentity.getEmail(), userentity.getFirstName());
 
 		return "Login";// Same name As JSP page

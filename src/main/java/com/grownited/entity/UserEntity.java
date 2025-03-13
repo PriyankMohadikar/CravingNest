@@ -27,6 +27,7 @@ public class UserEntity {
 	private String role;
 	private boolean isactive;
 	private Date createdAt;
+	private String profilePicPath;
 	
 	
 	public Integer getUserId() {
@@ -89,6 +90,12 @@ public class UserEntity {
 	}
 	public void setIsactive(boolean isactive) {
 		this.isactive = isactive;
+	}
+	public String getProfilePicPath() {
+		return profilePicPath;
+	}
+	public void setProfilePicPath(String profilePicPath) {
+		this.profilePicPath = profilePicPath;
 	}
 	
 	
