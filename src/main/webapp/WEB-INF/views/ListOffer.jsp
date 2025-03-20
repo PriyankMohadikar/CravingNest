@@ -54,13 +54,13 @@
                                 <tbody>
                                     <c:forEach var="location" items="${locations}">
                                         <tr>
-                                            <td>${location.title}</td>
-                                            <td>${location.foodType}</td>
-                                            <td>${location.areaId}</td>
-                                            <td>${location.cityId}</td>
+                                            <td>${location[0]}</td>
+                                            <td>${location[1]}</td>
+                                            <td>${location[2]}</td>
+                                            <td>${location[3]}</td>
                                             <td>
                                                 <c:choose>
-                                                    <c:when test="${location.active}">
+                                                    <c:when test="${location[4]}">
                                                         <span class="badge bg-success">Active</span>
                                                     </c:when>
                                                     <c:otherwise>
@@ -70,10 +70,10 @@
                                             </td>
                                             <td>
                                                 <form action="toggleStatus" method="post">
-                                                    <input type="hidden" name="locationId" value="${location.locationId}">
+                                                    <input type="hidden" name="locationId" value="${location[5]}">
                                                     <button type="submit" class="btn btn-warning btn-sm">
                                                         <c:choose>
-                                                            <c:when test="${location.active}">Deactivate</c:when>
+                                                            <c:when test="${location[4]}">Deactivate</c:when>
                                                             <c:otherwise>Activate</c:otherwise>
                                                         </c:choose>
                                                     </button>

@@ -93,7 +93,7 @@
             <c:forEach var="location" items="${locations}">
                 <div class="col-md-4">
                     <div class="card food-card">
-                        <img src="https://www.pexels.com/search/food/" class="card-img-top" alt="Food Image">
+                        <img src="${location.foodPicPath}" class="card-img-top" alt="Food Image">
                         <div class="card-body">
                             <h5 class="card-title">${location.title}</h5>
                             <p class="card-text">${location.description}</p>

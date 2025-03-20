@@ -86,7 +86,7 @@ public class Usercontroller {
 		// Role name Should always in Caps
 		userentity.setRole("USER");
 		userentity.setIsactive(true);
-// Profile path in userentity
+// Profile path in user entity
 		
 	// logic for Password Encryption
 		String encPassword = encoder.encode(userentity.getPassword());

@@ -23,7 +23,8 @@ public class LocationEntity {
 	private Integer cityId; // Foreign Key for City
 	private Integer areaId; // Foreign Key for Area
 	private String foodType; // E.g., Pizza, Burger
-
+	private String foodPicPath;
+	
 	public Integer getLocationId() {
 		return locationId;
 	}
@@ -110,6 +111,14 @@ public class LocationEntity {
 
 	public void setFoodType(String foodType) {
 		this.foodType = foodType;
+	}
+
+	public String getFoodPicPath() {
+		return foodPicPath;
+	}
+
+	public void setFoodPicPath(String foodPicPath) {
+		this.foodPicPath = foodPicPath;
 	}
 
 }
