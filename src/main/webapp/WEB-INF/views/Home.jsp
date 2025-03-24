@@ -81,13 +81,12 @@
     </nav>
     <!-- Food Deals Banner -->
     <div class="banner">
-
-    <img src="assets/img/logo.png" alt="CravingNest Banner" class="img-fluid">
- </div>
+		<img src="assets/img/Foodbanner.jpeg" alt="CravingNest Banner" class="img-fluid" style="height: 70vh;width: 100%;">
+    </div>
 
     <!-- Food Deals Section -->
     <div class="container mt-4">
-        <h2 class="text-center mb-4">Current Food Deals & Offers</h2>
+        <h2 class="font-weight-bold fs-1 text-center mb-4">Current Food Deals & Offers</h2>
 
         <div class="row">
             <c:forEach var="location" items="${locations}">
@@ -100,6 +99,7 @@
                             <p><b>Category:</b> ${location.category} | <b>Food Type:</b> ${location.foodType}</p>
                             <p><b>Timings:</b> ${location.timings}</p>
                             <p><b>Contact:</b> ${location.contactNumber}</p>
+                            <a href="offerdetails?offerId=${location.locationId}" class="btn btn-primary w-100 mt-2">View Details</a>
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ public class RatingEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ratingId; // primary key
-	private Integer offerId;
+	private Integer offerId; // foreign key
 	private String comments;
 	private Integer rating;
 	public Integer getRatingId() {

@@ -10,31 +10,48 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        body::before {
+            content: "";
+            background: url('assets/img/loginbg.jpg') no-repeat center center/cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+        }
         .signup-box {
             border: 1px solid #dee2e6;
             border-radius: 10px;
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+        }
+        .signup-box.bg-dark {
+            background-color: rgba(33, 37, 41, 0.95) !important;
         }
     </style>
 
     <script>
         function toggleDarkMode() {
-            document.body.classList.toggle("bg-dark");
             let box = document.querySelector(".signup-box");
             box.classList.toggle("bg-dark");
             box.classList.toggle("text-white");
-            let formElements = document.querySelectorAll(".form-control");
+            let formElements = box.querySelectorAll(".form-control");
             formElements.forEach(el => el.classList.toggle("bg-dark"));
             formElements.forEach(el => el.classList.toggle("text-white"));
         }
     </script>
 </head>
-<body class="bg-light">
+<body>
     <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-md-4 col-lg-6">
+            <div class="col-md-6 col-lg-5">
                 <div class="signup-box p-4 shadow-lg">
-			     <h1 class="text-center mb-4">Craving<span class="text-warning">Nest</span></h1>
+                    <h1 class="text-center mb-4">Craving<span class="text-warning">Nest</span></h1>
                     <h3 class="text-center mb-4">Sign Up</h3>
                     <form action="saveuser" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
@@ -63,10 +80,8 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                         <label for="profilePic" class="form-label"><i class="fa-solid fa-user"></i> Profile:</label>
-                        <input type="file" class="form-control" placeholder="Profile"
-								name="profilePic" />
-							
+                            <label for="profilePic" class="form-label"><i class="fa-solid fa-user"></i> Profile:</label>
+                            <input type="file" class="form-control" name="profilePic" />
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label"><i class="fas fa-lock me-2"></i>Password:</label>

@@ -26,60 +26,59 @@ public class LocationController {
 
 	@Autowired
 	CityRepository cityrepo;
-	
+
 	@Autowired
 	AreaRepository arearepo;
-	
+
 	@Autowired
 	LocationRepository locationrepo;
-	
+
 	@Autowired
 	Cloudinary cloudinary;
-	
+
 	@GetMapping("home")
 	public String home(Model model) {
-		List<LocationEntity> activelocation	= locationrepo.findByActiveTrue();
+		List<LocationEntity> activelocation = locationrepo.findByActiveTrue();
 		model.addAttribute("locations", activelocation);
 		return "Home";
 	}
-	
-	
+
 	@GetMapping("listoffer")
 	public String listOfferAdmin(Model model) {
-//	 List<LocationEntity> locations	= locationrepo.findAll();
-	 List<Object[]> locations = locationrepo.getAll();
-	 model.addAttribute("locations", locations);
+//	CUSTOM SQL QUERY IN LOCAITON REPOSITORY;
+		List<Object[]> locations = locationrepo.getAll();
+		model.addAttribute("locations", locations);
 		return "ListOffer";
 	}
-	
+
 	@GetMapping("addlocation")
 	public String addfoodandlocationdetails(Model model) {
-		model.addAttribute("cities",cityrepo.findAll());
-		model.addAttribute("areas",arearepo.findAll());
+		model.addAttribute("cities", cityrepo.findAll());
+		model.addAttribute("areas", arearepo.findAll());
 		return "AddLocation";
 	}
-	
+
 	@PostMapping("savelocation")
-	public String savefoodandlocationdetails(LocationEntity locationentity,MultipartFile foodPic) {
+	public String savefoodandlocationdetails(LocationEntity locationentity, MultipartFile foodPic) {
 		try {
 			Map result = cloudinary.uploader().upload(foodPic.getBytes(), ObjectUtils.emptyMap());
 			locationentity.setFoodPicPath(result.get("url").toString());
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
-		
-		 locationentity.setActive(false); // Set active to false by default
+		}
+
+		locationentity.setActive(false); // Set active to false by default
 		locationrepo.save(locationentity);
 //		return "redirect:/addlocation";
 		return "redirect:/addlocation";
 	}
-	
+
 	@PostMapping("toggleStatus")
 	public String toggleOfferStatus(Integer locationId) {
-	    LocationEntity location = locationrepo.findById(locationId).get(); // Directly get the entity
-	    location.setActive(!location.getActive()); // Toggle active status
-	    locationrepo.save(location);
-	    return "redirect:/listoffer";
+		LocationEntity location = locationrepo.findById(locationId).get(); // Directly get the entity
+		location.setActive(!location.getActive()); // Toggle active status
+		locationrepo.save(location);
+		return "redirect:/listoffer";
 	}
-	
+
 }
