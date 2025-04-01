@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>List Of Users</title>
+    <title>Manage Food Deals & Offers</title>
     <style>
         .dataTables_wrapper .dataTables_paginate .paginate_button {
             padding: 0.2em 0.6em;
@@ -25,11 +24,11 @@
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>User List</h1>
+            <h1>Manage Food Deals & Offers</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">List</li>
+                    <li class="breadcrumb-item"><a href="home">FOOD</a></li>
+                    <li class="breadcrumb-item active">List of Restaurants</li>
                 </ol>
             </nav>
         </div>
@@ -39,30 +38,46 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title text-center mb-4">List of Users</h2>
+                            <h2 class="card-title text-center mb-4">Food Deals & Offers</h2>
                             
-                            <table id="userTable" class="table table-striped table-bordered">
+                            <table id="offerTable" class="table table-striped table-bordered">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Gender</th>
-                                        <th>Role</th>
-                                        <th>Actions</th>
+                                        <th>Location Title</th>
+                                        <th>Food Type</th>
+                                        <th>Area</th>
+                                        <th>City</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${userlist}" var="user">
+                                    <c:forEach var="location" items="${locations}">
                                         <tr>
-                                            <td>${user.firstName}</td>
-                                            <td>${user.lastName}</td>
-                                            <td>${user.email}</td>
-                                            <td>${user.gender}</td>
-                                            <td>${user.role}</td>
+                                            <td>${location[0]}</td>
+                                            <td>${location[1]}</td>
+                                            <td>${location[2]}</td>
+                                            <td>${location[3]}</td>
                                             <td>
-                                                <a href="viewuser?userId=${user.userId}" class="btn btn-info btn-sm">View</a>
-                                                <a href="deleteuser?userId=${user.userId}" class="btn btn-danger btn-sm">Delete</a>
+                                                <c:choose>
+                                                    <c:when test="${location[4]}">
+                                                        <span class="badge bg-success">Active</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span class="badge bg-danger">Inactive</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <form action="toggleStatus" method="post">
+                                                    <input type="hidden" name="locationId" value="${location[5]}">
+                                                    <button type="submit" class="btn btn-warning btn-sm">
+                                                        <c:choose>
+                                                            <c:when test="${location[4]}">Deactivate</c:when>
+                                                            <c:otherwise>Activate</c:otherwise>
+                                                        </c:choose>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -86,17 +101,17 @@
     <!-- DataTables Initialization -->
     <script>
         $(document).ready(function() {
-            $('#userTable').DataTable({
-                "pageLength": 10,         // 7 users per page
+            $('#offerTable').DataTable({
+                "pageLength": 10,         // 10 offers per page
                 "paging": true,          // Enable pagination
                 "searching": true,       // Enable search
                 "ordering": true,        // Enable sorting
                 "info": true,           // Show table information
-                "lengthMenu": [10, 15, 20, 25], // Options for entries per page (multiples of 7)
+                "lengthMenu": [10, 15, 20, 25], // Options for entries per page
                 "language": {
-                    "search": "Search users:",
-                    "lengthMenu": "Show _MENU_ users per page",
-                    "info": "Showing _START_ to _END_ of _TOTAL_ users",
+                    "search": "Search offers:",
+                    "lengthMenu": "Show _MENU_ offers per page",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ offers",
                     "paginate": {
                         "first": "First",
                         "last": "Last",
@@ -110,7 +125,7 @@
                         "orderable": false  // Disable sorting for Actions
                     }
                 ],
-                "order": [[0, "asc"]]  // Default sort by First Name ascending
+                "order": [[0, "asc"]]  // Default sort by Location Title ascending
             });
         });
     </script>

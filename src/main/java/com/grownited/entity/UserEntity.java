@@ -23,11 +23,11 @@ public class UserEntity {
 	@Column(unique = true)
 	private String email; 
 	private String password;
-//	private String city;
 	private String role;
 	private boolean isactive;
 	private Date createdAt;
 	private String profilePicPath;
+//	private String city;
 	
 	
 	public Integer getUserId() {

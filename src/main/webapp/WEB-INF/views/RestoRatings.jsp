@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>Offer Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,6 +22,10 @@
     </style>
 </head>
 <body>
+
+								<!-- For Restaurants Rating and Comments NOT Offers  -->
+						<!--** USing Location and Rating table WIth Connecting locationId **-->
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
@@ -55,7 +60,7 @@
             <hr>
             <h5>Add your rating:</h5>
             <form action="saveRating" method="post">
-                <input type="hidden" name="offerId" value="${location.locationId}">
+                <input type="hidden" name="locationId" value="${location.locationId}">
                 <div class="mb-3">
                     <label for="comments">Comments:</label>
                     <textarea class="form-control" name="comments" required></textarea>

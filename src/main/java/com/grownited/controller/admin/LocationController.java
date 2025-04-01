@@ -23,7 +23,7 @@ import com.grownited.repository.LocationRepository;
 
 @Controller
 public class LocationController {
-
+//LocationController to RatingController using locationId AS FK
 	@Autowired
 	CityRepository cityrepo;
 
@@ -43,14 +43,17 @@ public class LocationController {
 		return "Home";
 	}
 
-	@GetMapping("listoffer")
+	
+	// Admin Panel
+	@GetMapping("listrestaurant")
 	public String listOfferAdmin(Model model) {
 //	CUSTOM SQL QUERY IN LOCAITON REPOSITORY;
 		List<Object[]> locations = locationrepo.getAll();
 		model.addAttribute("locations", locations);
-		return "ListOffer";
+		return "ListRestaurant";
 	}
-
+	
+// Add by Admin or user/owner
 	@GetMapping("addlocation")
 	public String addfoodandlocationdetails(Model model) {
 		model.addAttribute("cities", cityrepo.findAll());
@@ -58,6 +61,7 @@ public class LocationController {
 		return "AddLocation";
 	}
 
+	// save details
 	@PostMapping("savelocation")
 	public String savefoodandlocationdetails(LocationEntity locationentity, MultipartFile foodPic) {
 		try {
@@ -69,16 +73,17 @@ public class LocationController {
 
 		locationentity.setActive(false); // Set active to false by default
 		locationrepo.save(locationentity);
-//		return "redirect:/addlocation";
 		return "redirect:/addlocation";
 	}
 
+	
+	// Active or Inactive by admin
 	@PostMapping("toggleStatus")
 	public String toggleOfferStatus(Integer locationId) {
 		LocationEntity location = locationrepo.findById(locationId).get(); // Directly get the entity
 		location.setActive(!location.getActive()); // Toggle active status
 		locationrepo.save(location);
-		return "redirect:/listoffer";
+		return "redirect:/listrestaurant";
 	}
 
 }

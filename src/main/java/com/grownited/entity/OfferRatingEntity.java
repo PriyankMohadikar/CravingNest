@@ -7,27 +7,29 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ratings")
-public class RatingEntity {
+@Table(name = "offerratings")
+public class OfferRatingEntity {
 
-	// Rating & comments on Restaurant Place and Food NOT Offers
-	// Connect by locationId in Location table and Rating table
-	
+		// Rating & comments on Restaurant Offers
+		// Connect by OfferId as FK and offerratingId AS PK		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer ratingId; // primary key
-	private Integer locationId; // foreign key
+	private Integer offerratingId; // primary key
+	private Integer offerId; // foreign key
 	private String comments;
 	private Integer rating;
-	
-	
-	public Integer getRatingId() {
-		return ratingId;
+	public Integer getOfferratingId() {
+		return offerratingId;
 	}
-	public void setRatingId(Integer ratingId) {
-		this.ratingId = ratingId;
+	public void setOfferratingId(Integer offerratingId) {
+		this.offerratingId = offerratingId;
 	}
-	
+	public Integer getOfferId() {
+		return offerId;
+	}
+	public void setOfferId(Integer offerId) {
+		this.offerId = offerId;
+	}
 	public String getComments() {
 		return comments;
 	}
@@ -40,14 +42,6 @@ public class RatingEntity {
 	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
-	public Integer getLocationId() {
-		return locationId;
-	}
-	public void setLocationId(Integer locationId) {
-		this.locationId = locationId;
-	}
-	
-	
 	
 	
 }

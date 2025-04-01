@@ -60,25 +60,8 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <!-- Left: Logo & Name -->
-            <a class="navbar-brand" href="#">Craving<span>Nest</span></a>
-
-            <!-- Right: Profile -->
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <img src="${user.profilePicPath}" alt="Profile" class="profile-pic">
-                    <span class="user-name">${user.firstName} ${user.lastName}</span>
-                </li>
-	                
-	               <li class="nav-item">
-	    <a href="logout" class="btn btn-outline-light ms-3">Logout</a>
-				</li>
-                
-            </ul>
-        </div>
-    </nav>
+   <jsp:include page="Navbar.jsp"></jsp:include>
+   
     <!-- Food Deals Banner -->
     <div class="banner">
 		<img src="assets/img/Foodbanner.jpeg" alt="CravingNest Banner" class="img-fluid" style="height: 70vh;width: 100%;">
@@ -99,7 +82,7 @@
                             <p><b>Category:</b> ${location.category} | <b>Food Type:</b> ${location.foodType}</p>
                             <p><b>Timings:</b> ${location.timings}</p>
                             <p><b>Contact:</b> ${location.contactNumber}</p>
-                            <a href="offerdetails?offerId=${location.locationId}" class="btn btn-primary w-100 mt-2">View Details</a>
+                            <a href="locationdetails?locationId=${location.locationId}" class="btn btn-primary w-100 mt-2">View Details</a>
                         </div>
                     </div>
                 </div>

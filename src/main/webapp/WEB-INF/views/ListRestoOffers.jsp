@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Manage Food Deals & Offers</title>
+    <title>Restaurant Offers List</title>
     <style>
         .dataTables_wrapper .dataTables_paginate .paginate_button {
             padding: 0.2em 0.6em;
@@ -24,11 +24,11 @@
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Manage Food Deals & Offers</h1>
+            <h1>Restaurant Offers</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="home">FOOD</a></li>
-                    <li class="breadcrumb-item active">List Offers</li>
+                    <li class="breadcrumb-item active">Offers List</li>
                 </ol>
             </nav>
         </div>
@@ -38,29 +38,35 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title text-center mb-4">Food Deals & Offers</h2>
+                            <h2 class="card-title text-center mb-4">Offers List</h2>
                             
                             <table id="offerTable" class="table table-striped table-bordered">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th>Location Title</th>
-                                        <th>Food Type</th>
+                                        <th>Place</th>
+                                        <th>Description</th>
                                         <th>Area</th>
                                         <th>City</th>
+                                        <th>FoodType</th>
+                                        <th>End Date</th>
+                                        <th>Offer-Details</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="location" items="${locations}">
+                                    <c:forEach var="offer" items="${offers}">
                                         <tr>
-                                            <td>${location[0]}</td>
-                                            <td>${location[1]}</td>
-                                            <td>${location[2]}</td>
-                                            <td>${location[3]}</td>
+                                            <td>${offer[0]}</td>
+                                            <td>${offer[1]}</td>
+                                            <td>${offer[2]}</td>
+                                            <td>${offer[3]}</td>
+                                            <td>${offer[4]}</td>
+                                            <td>${offer[5]}</td>
+                                            <td>${offer[6]}</td>
                                             <td>
                                                 <c:choose>
-                                                    <c:when test="${location[4]}">
+                                                    <c:when test="${offer[7]}">
                                                         <span class="badge bg-success">Active</span>
                                                     </c:when>
                                                     <c:otherwise>
@@ -69,11 +75,11 @@
                                                 </c:choose>
                                             </td>
                                             <td>
-                                                <form action="toggleStatus" method="post">
-                                                    <input type="hidden" name="locationId" value="${location[5]}">
+                                                <form action="toggleOfferStatus" method="post">
+                                                    <input type="hidden" name="offerId" value="${offer[8]}">
                                                     <button type="submit" class="btn btn-warning btn-sm">
                                                         <c:choose>
-                                                            <c:when test="${location[4]}">Deactivate</c:when>
+                                                            <c:when test="${offer[7]}">Deactivate</c:when>
                                                             <c:otherwise>Activate</c:otherwise>
                                                         </c:choose>
                                                     </button>
@@ -90,24 +96,20 @@
         </section>
     </main>
 
-    <!-- jQuery & DataTables JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- DataTables Initialization -->
     <script>
         $(document).ready(function() {
             $('#offerTable').DataTable({
-                "pageLength": 10,         // 10 offers per page
-                "paging": true,          // Enable pagination
-                "searching": true,       // Enable search
-                "ordering": true,        // Enable sorting
-                "info": true,           // Show table information
-                "lengthMenu": [10, 15, 20, 25], // Options for entries per page
+                "pageLength": 10,
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "lengthMenu": [10, 15, 20, 25],
                 "language": {
                     "search": "Search offers:",
                     "lengthMenu": "Show _MENU_ offers per page",
@@ -121,11 +123,11 @@
                 },
                 "columnDefs": [
                     {
-                        "targets": 5,    // Actions column
-                        "orderable": false  // Disable sorting for Actions
+                        "targets": 8,
+                        "orderable": false
                     }
                 ],
-                "order": [[0, "asc"]]  // Default sort by Location Title ascending
+                "order": [[0, "asc"]]
             });
         });
     </script>

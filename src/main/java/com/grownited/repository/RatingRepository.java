@@ -8,6 +8,8 @@ import com.grownited.entity.RatingEntity;
 
 public interface RatingRepository extends JpaRepository<RatingEntity, Integer>{
 	
-	   List<RatingEntity> findByOfferId(Integer offerId);
+	   //	Rating of Particular Restaurants using locationId
+	
+	   List<RatingEntity> findByLocationId(Integer locationId);
 
 }

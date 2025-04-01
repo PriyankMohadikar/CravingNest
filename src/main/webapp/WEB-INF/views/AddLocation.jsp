@@ -59,7 +59,7 @@
 
 			<div class="mb-3">
 				<label for="foodPic" class="form-label"><i
-					class="fas fa-salad"></i> Food/Discount :</label> <input type="file"
+					class="fas fa-salad"></i> Restaurants/Place :</label> <input type="file"
 					class="form-control" placeholder="FOODPIC" name="foodPic" />
 
 			</div>

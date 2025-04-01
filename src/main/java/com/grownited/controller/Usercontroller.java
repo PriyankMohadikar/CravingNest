@@ -20,6 +20,8 @@ import com.grownited.entity.UserEntity;
 import com.grownited.repository.UserRepository;
 import com.grownited.service.MailService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class Usercontroller {
 
@@ -66,8 +68,56 @@ public class Usercontroller {
 		return "redirect:/listuser";
 	}
 	
-	
+	// edit user data
+	@GetMapping("edituser")
+	public String editUser(Integer userId, Model model) {
+	    Optional<UserEntity> op = repoUser.findById(userId);
+	    if (op.isPresent()) {
+	        model.addAttribute("user", op.get());
+	        return "EditUser"; // JSP page for editing user
+	    }
+	    return "redirect:/listuser"; // Redirect if user not found
+	}
 
+	
+	// Update user data
+    @PostMapping("updateuser")
+    public String updateUser(UserEntity userEntity, MultipartFile profilePic,HttpSession session) {
+        Optional<UserEntity> op = repoUser.findById(userEntity.getUserId());
+        if (op.isPresent()) {
+            UserEntity existingUser = op.get();
+
+            // Update fields
+            existingUser.setFirstName(userEntity.getFirstName());
+            existingUser.setLastName(userEntity.getLastName());
+            existingUser.setContact(userEntity.getContact());
+            existingUser.setGender(userEntity.getGender());
+            // if email is change then send mail
+            existingUser.setEmail(userEntity.getEmail());
+            existingUser.setIsactive(true); // Set active to true by default
+
+            // Handle profile picture update
+            if (!profilePic.isEmpty()) {
+                try {
+                    Map result = cloudinary.uploader().upload(profilePic.getBytes(), ObjectUtils.emptyMap());
+                    existingUser.setProfilePicPath(result.get("url").toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+           UserEntity updateduser =  repoUser.save(existingUser);
+            session.setAttribute("user", updateduser);
+        }
+        if ("ADMIN".equals(userEntity.getRole())) {
+            return "redirect:/listuser";
+        } else {
+            return "redirect:/home";
+        }
+    }
+
+	
+	
+	// saving user data from signup time
 	@PostMapping("saveuser")
 	public String saveUser(UserEntity userentity,MultipartFile profilePic) {
 		

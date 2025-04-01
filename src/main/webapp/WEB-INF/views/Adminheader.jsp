@@ -8,6 +8,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+.profile-pic {
+    width: 50px; /* Adjust size */
+    height: 50px; /* Ensures perfect circle */
+    border-radius: 50%; /* Makes it round */
+    object-fit: cover; /* Crops the image to fit perfectly */
+}
+
+</style>
 <body>
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -179,7 +188,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="${user.profilePicPath }" alt="Profile" class="profile-pic">
             <span class="d-none d-md-block dropdown-toggle ps-2">${user.firstName} ${user.lastName}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -201,27 +210,13 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
+			<li>
+              <a class="dropdown-item d-flex align-items-center" href="edituser?userId=${user.userId}">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Update Profile</span>
               </a>
             </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
+            
             <li>
               <a class="dropdown-item d-flex align-items-center" href="logout">
                 <i class="bi bi-box-arrow-right"></i>

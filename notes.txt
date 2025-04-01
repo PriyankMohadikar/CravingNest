@@ -1,4 +1,4 @@
-Table Name =state		
+ Table Name =state		
                 stateId		
                 stateName		
 
@@ -239,13 +239,44 @@ Delete User -- deleteById(userId)
 				model.addAttribute("city", city);
 ==================================================================================
 
+Work pending - 25/3/25
+	in AddOffer jsp Create Upload File functionality
+	navbar settings
+	offers jsp where active offers View
+	Admin panel - listoffers,Ratingwise List of Location 
+	push in GitHub
 
 
+============================IMp Connections
 
+Location -> LocationID
+Offer -> offerId Pk -> Location FK         -- Connect location table
+ratings -> offerId FK  -- Connects offer table 
 
+==============================- *Location and PlaceRating IMPSS*  ==================================
+				  ** Restaurant Ratings **
+// View Particular Location/Restaurant/Food_Place  -- *Location and PlaceRating IMPSS*
+	@GetMapping("locationdetails")
+	public String showofferdetails(Integer locationId, Model model) {
+		Optional<LocationEntity> locationop = locationrepo.findById(locationId);
+		if (locationop.isPresent()) {
+			model.addAttribute("location", locationop.get());
+			List<RatingEntity> details = ratingrepo.findByOfferId(locationId);
+			model.addAttribute("ratings", details);
+		}
+		return "OfferDetial";
+	}
 
+====================================IMPS==========================================
 
+					** For Restaurants Comments and Ratings ** I HAVE MADE NECESSARY CHANGES IN ENTITY AND RESOR
+location table -> Rating table using locationId -> OfferDetial.jsp TO Change in RestoRatings.jsp
+IN Rating table change to locationId
 
+					** For Restaurants -> Offers -> Comments and Ratings **
+Location -> Offer -> RatingForOffers -> using offerId -> OffersRatings.jsp
+
+===================================================================================
 
 
 

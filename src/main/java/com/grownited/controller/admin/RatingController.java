@@ -14,6 +14,8 @@ import com.grownited.entity.RatingEntity;
 import com.grownited.repository.LocationRepository;
 import com.grownited.repository.RatingRepository;
 
+//							 Comments & rating For Restaurant Place/food
+
 @Controller
 public class RatingController {
 	@Autowired
@@ -21,22 +23,24 @@ public class RatingController {
 
 	@Autowired
 	RatingRepository ratingrepo;
-	
-	@GetMapping("offerdetails")
-	public String showofferdetails(Integer offerId, Model model) {
-		Optional<LocationEntity> locationop = locationrepo.findById(offerId);
+
+	// View Particular Location/Restaurant/Food_Place  -- *Location and PlaceRating IMPSS*
+	@GetMapping("locationdetails")
+	public String showofferdetails(Integer locationId, Model model) {
+		Optional<LocationEntity> locationop = locationrepo.findById(locationId);
 		if (locationop.isPresent()) {
 			model.addAttribute("location", locationop.get());
-//			System.out.println();
-			List<RatingEntity> details = ratingrepo.findByOfferId(offerId);
+			// For LocationId as FK
+			List<RatingEntity> details = ratingrepo.findByLocationId(locationId);
 			model.addAttribute("ratings", details);
 		}
-		return "OfferDetial";
+		return "RestoRatings";
 	}
 
 	@PostMapping("saveRating")
 	public String saveRating(RatingEntity ratingEntity) {
 		ratingrepo.save(ratingEntity);
-		return "redirect:/offerdetails?offerId=" + ratingEntity.getOfferId();
+//		System.out.println(ratingEntity.getOfferId());  Location ID 
+		return "redirect:/locationdetails?locationId=" + ratingEntity.getLocationId();
 	}
 }

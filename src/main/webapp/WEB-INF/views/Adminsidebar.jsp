@@ -50,16 +50,29 @@
 				href="addcity"> <i class="bi bi-card-list"></i> <span>Add
 						City</span>
 			</a></li>
+			
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="addarea"> <i class="bi bi-card-list"></i> <span>Add
+						Area</span>
+			</a></li>
+			
 			<!-- End Register Page Nav -->
 
 			<li class="nav-item"><a class="nav-link collapsed" href="addlocation">
 					<i class="bi bi-box-arrow-in-right"></i> <span>Add Food & location</span>
 			</a></li>
 			
-			<li class="nav-item"><a class="nav-link collapsed" href="listoffer">
-					<i class="bi bi-box-arrow-in-right"></i> <span>Current Offers</span>
+			<li class="nav-item"><a class="nav-link collapsed" href="addoffer">
+					<i class="bi bi-box-arrow-in-right"></i> <span>Add Restaurant Offers</span>
 			</a></li>
 			
+			<li class="nav-item"><a class="nav-link collapsed" href="listrestaurant">
+					<i class="bi bi-box-arrow-in-right"></i> <span>Current Restaurant</span>
+			</a></li>
+			
+			<li class="nav-item"><a class="nav-link collapsed" href="listrestooffers">
+					<i class="bi bi-box-arrow-in-right"></i> <span>Current Restaurant Offers</span>
+			</a></li>
 			<!-- End Login Page Nav -->
 			<li class="nav-item"><a class="nav-link collapsed" href="logout">
 					<i class="bi bi-box-arrow-in-right"></i> <span>Sign Out</span>
