@@ -1,6 +1,7 @@
 package com.grownited.controller.admin;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -17,6 +18,7 @@ import com.cloudinary.utils.ObjectUtils;
 import com.grownited.entity.LocationEntity;
 import com.grownited.entity.OfferEntity;
 import com.grownited.repository.LocationRepository;
+import com.grownited.repository.OfferRatingRepository;
 import com.grownited.repository.OfferRepository;
 
 
@@ -31,6 +33,9 @@ public class OfferController {
 
 	@Autowired
 	OfferRepository repooffer;
+	
+	@Autowired
+	OfferRatingRepository offerRatingRepository;
 
 	@GetMapping("addoffer")
 	public String addofferdetails(Model model) {
@@ -44,6 +49,13 @@ public class OfferController {
 	public String showoffers(Model model) {
 		List<LocationEntity> location = repolocation.findAll();
 		List<OfferEntity> offers = repooffer.findByActiveTrue();
+		// avg rating of offers 
+		Map<Integer, Double> avgOffrating = new HashMap<>();
+		for(OfferEntity offer : offers) {
+			Double avgofferratings = offerRatingRepository.findAverageRatingByOfferId(offer.getOfferId());
+			avgOffrating.put(offer.getOfferId(), avgofferratings);
+		}
+		model.addAttribute("avgratings", avgOffrating);
 		model.addAttribute("offers", offers);
 		model.addAttribute("locations", location);
 		return "Offers";

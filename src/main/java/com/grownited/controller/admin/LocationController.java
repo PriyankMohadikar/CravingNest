@@ -1,6 +1,7 @@
 package com.grownited.controller.admin;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -19,7 +20,7 @@ import com.grownited.entity.LocationEntity;
 import com.grownited.repository.AreaRepository;
 import com.grownited.repository.CityRepository;
 import com.grownited.repository.LocationRepository;
-
+import com.grownited.repository.RatingRepository;
 
 @Controller
 public class LocationController {
@@ -36,14 +37,24 @@ public class LocationController {
 	@Autowired
 	Cloudinary cloudinary;
 
+	@Autowired
+	RatingRepository ratingRepository;
+
 	@GetMapping("home")
 	public String home(Model model) {
 		List<LocationEntity> activelocation = locationrepo.findByActiveTrue();
-		model.addAttribute("locations", activelocation);
+		
+		// Create a map to store average ratings for each location
+	    Map<Integer, Double> ratingsMap = new HashMap<>();
+	    for (LocationEntity location : activelocation) {
+	        Double avgRating = ratingRepository.findAverageRatingByLocationId(location.getLocationId());
+	        ratingsMap.put(location.getLocationId(), avgRating);
+	    }
+	    model.addAttribute("locations", activelocation);
+	    model.addAttribute("ratingsMap", ratingsMap);	    
 		return "Home";
 	}
 
-	
 	// Admin Panel
 	@GetMapping("listrestaurant")
 	public String listOfferAdmin(Model model) {
@@ -52,7 +63,7 @@ public class LocationController {
 		model.addAttribute("locations", locations);
 		return "ListRestaurant";
 	}
-	
+
 // Add by Admin or user/owner
 	@GetMapping("addlocation")
 	public String addfoodandlocationdetails(Model model) {
@@ -76,7 +87,6 @@ public class LocationController {
 		return "redirect:/addlocation";
 	}
 
-	
 	// Active or Inactive by admin
 	@PostMapping("toggleStatus")
 	public String toggleOfferStatus(Integer locationId) {

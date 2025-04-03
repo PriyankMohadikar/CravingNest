@@ -10,9 +10,9 @@ import com.grownited.entity.LocationEntity;
 
 @Repository
 public interface LocationRepository extends JpaRepository<LocationEntity, Integer> {
-	
-	@Query(value = "select l.title,l.food_type,a.area_name,c.city_name,l.active,l.location_id from location l,areas a,cities c where l.city_id = c.city_id and l.area_id = a.area_id;",nativeQuery = true)
+
+	@Query(value = "select l.title,l.food_type,a.area_name,c.city_name,l.active,l.location_id from location l,areas a,cities c where l.city_id = c.city_id and l.area_id = a.area_id;", nativeQuery = true)
 	List<Object[]> getAll();
-	
-	 List<LocationEntity> findByActiveTrue(); // Fetch only active locations
+
+	List<LocationEntity> findByActiveTrue(); // Fetch only active locations
 }

@@ -79,6 +79,9 @@
                 <a href="home" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
+                <a href="restaurants" class="nav-link">Restaurants</a>
+            </li>
+            <li class="nav-item">
                 <a href="restaurantBooking" class="nav-link">Restaurant Booking</a>
             </li>
             <li class="nav-item">
@@ -87,9 +90,9 @@
             <li class="nav-item dropdown">
                 <div class="d-flex align-items-center" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     
-                    <c:if test="${not empty sessionScope.user}">
-					    <img src="${sessionScope.user.profilePicPath}" alt="Profile" class="profile-pic">
-					    <span class="user-name">${sessionScope.user.firstName} ${sessionScope.user.lastName}</span>
+                    <c:if test="${not empty user}">
+					    <img src="${user.profilePicPath}" alt="Profile" class="profile-pic">
+					    <span class="user-name">${user.firstName} ${user.lastName}</span>
 					</c:if>
                     
                     <!--  For user profile and name from user session

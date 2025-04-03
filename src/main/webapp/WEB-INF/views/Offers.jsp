@@ -4,7 +4,10 @@
 <html lang="en">
 <head>
     <title>CravingNest - Restaurant Offers</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         .offer-card {
             transition: transform 0.3s, box-shadow 0.3s;
@@ -37,6 +40,26 @@
                                         ${location.title}
                                     </c:if>
                                 </c:forEach>
+                            </p>
+                            <p class="star-rating">
+                                <b>Rating:</b> 
+                                <span>
+                                    <c:set var="avgRating" value="${avgratings[offer.offerId]}"/>
+                                    <c:forEach begin="1" end="5" var="i">
+                                        <c:choose>
+                                            <c:when test="${i <= avgRating}">
+                                                <i class="bi bi-star-fill"></i>
+                                            </c:when>
+                                            <c:when test="${i - 0.5 <= avgRating}">
+                                                <i class="bi bi-star-half"></i>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <i class="bi bi-star"></i>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    (${avgRating})
+                                </span>
                             </p>
                             <a href="offerdetails?offerId=${offer.offerId }">Rating</a>
                             <!--				 FOR RAIING PARTICULAR OFFERS   ------------
