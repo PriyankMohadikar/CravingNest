@@ -15,8 +15,23 @@
             border: 1px solid #dee2e6;
             border-radius: 10px;
             background-color: #ffffff;
+            position: relative; /* Added for positioning the toggle button */
         }
-      
+        .dark-mode-toggle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .signup-section {
+            background-color: #0d6efd; /* Bootstrap primary blue */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .signup-section a {
+            color: white;
+            text-decoration: underline;
+        }
     </style>
 
     <script>
@@ -37,7 +52,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
                 <div class="login-box p-4 shadow-lg">
- 	  <h1 class="text-center mb-4">Craving<span class="text-warning">Nest</span></h1>
+                    <h1 class="text-center mb-4">Craving<span class="text-warning">Nest</span></h1>
                     <h3 class="text-center mb-4"><i class="fas fa-sign-in-alt me-2"></i>Login</h3>
                     <form action="authenticate" method="post">
                         <div class="mb-3">
@@ -56,8 +71,14 @@
                     
                     <div class="text-center mt-3">
                         <p class="text-danger">${error} ${errors}</p>
-                        <button class="btn btn-secondary" onclick="toggleDarkMode()">
-                            <i class="fas fa-moon me-2"></i>Toggle Dark Mode
+                        <div class="signup-section">
+                            <p class="mb-0">New user? <a href="signup"><i class="fas fa-user-plus me-1"></i>Create an account</a></p>
+                        </div>
+                    </div>
+
+                    <div class="dark-mode-toggle">
+                        <button class="btn btn-link p-0" onclick="toggleDarkMode()">
+                            <i class="fas fa-moon"></i>
                         </button>
                     </div>
                 </div>

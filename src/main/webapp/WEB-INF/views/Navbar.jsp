@@ -104,9 +104,13 @@
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                     <!-- Add more dropdown items here later -->
-                    <li><a class="dropdown-item" href="logout">Logout</a></li>
+					<li><a class="dropdown-item" href="userfoodofferinterest">Food Interest</a></li>
+                    <li><a class="dropdown-item" href="viewbookinghistory">Booking data</a></li>
                     <li><a class="dropdown-item" href="edituser?userId=${user.userId }">Edit Profile</a></li>
                     <li><a class="dropdown-item" href="viewuser?userId=${user.userId }">View Data</a></li>
+                    <li><a class="dropdown-item" href="addlocation">Add Restaurants</a></li>
+                    <li><a class="dropdown-item" href="addoffer">Add offers</a></li>
+                    <li><a class="dropdown-item" href="logout">Logout</a></li>
                     
                     
                 </ul>

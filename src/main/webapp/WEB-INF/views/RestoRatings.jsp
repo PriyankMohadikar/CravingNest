@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Offer Details - CravingNest</title>
+<title>Restaurants Details - CravingNest</title>
 
 <!-- Bootstrap CSS -->
 <link

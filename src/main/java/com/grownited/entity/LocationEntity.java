@@ -1,5 +1,8 @@
 package com.grownited.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +27,20 @@ public class LocationEntity {
 	private Integer areaId; // Foreign Key for Area
 	private String foodType; // E.g., Pizza, Burger
 	private String foodPicPath;
+	private Date createdDate = new Date(); // Current date by default
 	
+	  // Date format for dd/MM/yy
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yy");
+
+	
+    public String getCreatedDate() {
+        return createdDate != null ? DATE_FORMAT.format(createdDate) : null;
+    }
+    
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+    
 	public Integer getLocationId() {
 		return locationId;
 	}

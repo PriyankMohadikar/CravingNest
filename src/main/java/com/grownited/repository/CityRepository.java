@@ -12,6 +12,10 @@ import com.grownited.entity.CityEntity;
 @Repository
 public interface CityRepository extends JpaRepository<CityEntity, Integer> {
 
-	@Query(value = "select c.*,s.state_Name from cities c,state s where c.state_id = s.state_id",nativeQuery = true)
+	@Query(value = "select c.*,s.state_Name from cities c,state s where c.state_id = s.state_id", nativeQuery = true)
 	List<Citydto> getAll();
+
+//	List<CityEntity> findByStateStateId(int stateId); // Assuming state is a @ManyToOne in CityEntity
+
+	List<CityEntity> findByStateId(Integer stateId);
 }

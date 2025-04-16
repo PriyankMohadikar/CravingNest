@@ -15,10 +15,10 @@
             margin-bottom: 15px;
         }
     </style>
+    <jsp:include page="Admincss.jsp"></jsp:include>
+    <jsp:include page="Adminjs.jsp"></jsp:include>
 </head>
 <body>
-    <jsp:include page="Adminjs.jsp"></jsp:include>
-    <jsp:include page="Admincss.jsp"></jsp:include>
     <jsp:include page="Adminheader.jsp"></jsp:include>
     <jsp:include page="Adminsidebar.jsp"></jsp:include>
 

@@ -22,15 +22,25 @@ public class Statecontroller {
 	@Autowired
 	CityRepository repocity;
 
-	@GetMapping("addstate")
-	public String state() {
-		return "Newstate";
+//	@GetMapping("addstate")
+//	public String state() {
+//		return "Newstate";
+//	}
+	
+	@GetMapping("locationmanagement")
+	public String adminlocationmanagement(Model model) {
+		//list of state
+		List<StateEntity> allstate = repoState.findAll();
+		model.addAttribute("allstate", allstate);
+		//list of city
+		List<CityEntity> cities = repocity.findAll();
+		model.addAttribute("cities", cities);
+		return "LocationManagement";
 	}
-
 	@PostMapping("savestate")
 	public String addcity(StateEntity state) {
 		System.out.println(state.getStateName());
 		repoState.save(state);
-		return "Newstate";
+		return "redirect:/locationmanagement";
 	}
 }
