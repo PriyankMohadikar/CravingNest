@@ -277,13 +277,42 @@ IN Rating table change to locationId
 Location -> Offer -> RatingForOffers -> using offerId -> OffersRatings.jsp
 
 ===================================================================================
+FILTERING 
+		location repo
+				// for area wise filter
+	@Query(value = "SELECT * FROM location WHERE active = true AND area_id = :areaId", nativeQuery = true)
+	List<LocationEntity> findByActiveAndAreaId(@Param("areaId") Integer areaId);
+	
+	// Apply filter based on areaId parameter IN LocationController
+	    if (areaId != null) {
+	        activelocation = locationrepo.findByActiveAndAreaId(areaId);
+	    } else {
+	        activelocation = locationrepo.findByActiveTrue(); // Default: show all active locations
+	    }
+	    
+	    +++++++++++++++++++++++++++++++++++++++++++
+	    
+	    Dyanmic Filtering using state,city and area using AJAX endpoints
+	    
+======================================================================================
+Restaurant Booking JSP and logic
 
+url restaurantBooking	    
 
+Create a Entity using jsp form for booking and FK is UserId from session and locationId from location table
 
+New Entity/table name Booking
 
+ save booking details from user and admin can see Booking table can confirmed the request by making it confirmed|pending|Cancelled
 
-
-
+ <select class="form-control" name="bookingTime" id="bookingTime" required>
+                            <option value="">Select Time</option>
+                            <option value="12:00 PM">12:00 PM</option>
+                            <option value="1:00 PM">1:00 PM</option>
+                            <option value="6:00 PM">6:00 PM</option>
+                            <option value="7:00 PM">7:00 PM</option>
+                            <option value="8:00 PM">8:00 PM</option>
+                        </select>
 
 
 

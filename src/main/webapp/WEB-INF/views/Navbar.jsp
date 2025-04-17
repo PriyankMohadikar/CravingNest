@@ -106,6 +106,8 @@
                     <!-- Add more dropdown items here later -->
 					<li><a class="dropdown-item" href="userfoodofferinterest">Food Interest</a></li>
                     <li><a class="dropdown-item" href="viewbookinghistory">Booking data</a></li>
+                    <li><a class="dropdown-item" href="paymenthistory">Payment History</a></li>
+                    <li><a class="dropdown-item" href="purchasemembership">Buy Gold MemberShip</a></li>
                     <li><a class="dropdown-item" href="edituser?userId=${user.userId }">Edit Profile</a></li>
                     <li><a class="dropdown-item" href="viewuser?userId=${user.userId }">View Data</a></li>
                     <li><a class="dropdown-item" href="addlocation">Add Restaurants</a></li>
