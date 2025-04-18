@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 
 import com.grownited.entity.UserEntity;
+import com.grownited.repository.MembershipTransactionRepository;
 import com.grownited.repository.UserRepository;
 import com.grownited.service.MailService;
 
@@ -29,6 +30,9 @@ public class Scontroller {
 	
 	@Autowired
 	MailService serviceMail;
+	
+	@Autowired
+	MembershipTransactionRepository transactionRepository;
 
 	@GetMapping("login")
 	public String login() {
@@ -103,8 +107,10 @@ public class Scontroller {
 //		    op -> select * from users where email = "email" and password = "password";
 		if (op.isPresent()) {
 			UserEntity dbuser = op.get();
+			
 			// object have all data of the user
 			boolean ans = encoder.matches(password, dbuser.getPassword());
+			System.out.println("THe user is : " + dbuser.getMembershipStatus());
 			if (ans) {
 				session.setAttribute("user", dbuser);
 				if (dbuser.getRole().equals("ADMIN")) {

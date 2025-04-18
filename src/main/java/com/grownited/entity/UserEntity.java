@@ -27,9 +27,17 @@ public class UserEntity {
 	private boolean isactive;
 	private Date createdAt;
 	private String profilePicPath;
+	private String membershipStatus; 
+	
 //	private String city;
 	
 	
+	public String getMembershipStatus() {
+		return membershipStatus;
+	}
+	public void setMembershipStatus(String membershipStatus) {
+		this.membershipStatus = membershipStatus;
+	}
 	public Integer getUserId() {
 		return userId;
 	}

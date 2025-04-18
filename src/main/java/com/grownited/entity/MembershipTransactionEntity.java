@@ -11,7 +11,7 @@ public class MembershipTransactionEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String userId;
+	private Integer userId;
 	private String email;
 	private Double amount;
 	private String transactionId;
@@ -37,11 +37,11 @@ public class MembershipTransactionEntity {
 		this.id = id;
 	}
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 

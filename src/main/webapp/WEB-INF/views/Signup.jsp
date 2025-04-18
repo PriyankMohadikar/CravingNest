@@ -9,31 +9,47 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-        }
-        body::before {
-            content: "";
-            background: url('assets/img/loginbg.jpg') no-repeat center center/cover;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            z-index: -1;
-        }
-        .signup-box {
-            border: 1px solid #dee2e6;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(5px);
-        }
-        .signup-box.bg-dark {
-            background-color: rgba(33, 37, 41, 0.95) !important;
-        }
-    </style>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    body::before {
+        content: "";
+        background: url('assets/img/bookingbanner2.jpg') no-repeat center center/cover;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -2;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6));
+        z-index: -1;
+    }
+
+    .signup-box {
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(5px);
+        position: relative;
+        z-index: 1;
+    }
+
+    .signup-box.bg-dark {
+        background-color: rgba(33, 37, 41, 0.95) !important;
+    }
+</style>
+
 
     <script>
         function toggleDarkMode() {
@@ -47,6 +63,7 @@
     </script>
 </head>
 <body>
+<div class="overlay"></div> 
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5">

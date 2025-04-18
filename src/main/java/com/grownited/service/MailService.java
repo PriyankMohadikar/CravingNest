@@ -97,6 +97,38 @@ public class MailService {
 
         sendEmail(email, "🍽️ Offers You’ll Love from CravingNest!", body.toString());
     }
+    
+    
+    // Payment And GOLD member ship confirmation mail
+    @Async
+    public void sendGoldMembershipSuccessEmail(String email, String firstName) {
+        String subject = "🎉 Welcome to CravingNest Gold – Your Food Journey Just Leveled Up!";
+
+        String body = "<html><body style='font-family: Arial, sans-serif;'>" +
+                "<h2 style='color: #ff6f61;'>Hi " + firstName + ",</h2>" +
+                "<p>🎉 Congratulations on becoming a <strong>Gold Member</strong> of <strong>CravingNest</strong>! 🍽️✨</p>" +
+
+                "<p>Your payment was <strong>successful</strong>, and we’ve added <strong>3 exclusive discount coupons</strong> to your account!</p>" +
+
+                "<h3 style='color: #ffb347;'>🍕 What’s inside your Gold Membership?</h3>" +
+                "<ul>" +
+                "<li>🎁 <strong>3 Premium Coupons</strong> valid for 1 month</li>" +
+                "<li>🔥 <strong>Flat 30% Off</strong> at top-rated restaurants</li>" +
+                "<li>📍 Redeemable at select CravingNest-listed partners</li>" +
+                "<li>💰 Big savings on your favorite meals every time you order</li>" +
+                "</ul>" +
+
+                "<p style='margin-top: 20px;'>Your coupon codes are now active and waiting to be used. Just visit any participating restaurant on CravingNest, and apply your discount at checkout. 🍔🌮🍜</p>" +
+
+                "<p style='margin-top: 30px;'>Enjoy delicious moments, <br><strong style='color: #ff6f61;'>– Team CravingNest</strong> 🍕</p>" +
+
+                "<hr>" +
+                "<small style='color: gray;'>Note: Coupons are valid for 30 days from the date of purchase.</small>" +
+                "</body></html>";
+
+        sendEmail(email, subject, body);
+    }
+
 
     // ✅ Common method
     private void sendEmail(String to, String subject, String htmlBody) {

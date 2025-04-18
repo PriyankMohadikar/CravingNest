@@ -131,6 +131,9 @@ public class Usercontroller {
 		userentity.setCreatedAt(new Date());
 		// Role name Should always in Caps
 		userentity.setRole("USER");
+		// status of member
+		userentity.setMembershipStatus("NONE");
+		
 		userentity.setIsactive(true);
 		// logic for Password Encryption
 		String encPassword = encoder.encode(userentity.getPassword());

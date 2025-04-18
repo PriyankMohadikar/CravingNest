@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,6 +54,30 @@
             border-top-right-radius: 10px;
         }
         
+        /*GOld Design*/
+        .gold-member-label {
+		   padding: 4px 12px;
+		   background: linear-gradient(45deg, #FFD700, #FFA500);
+		   color: #000;
+		   font-weight: bold;
+		   border-radius: 12px;
+		   font-size: 14px;
+		   box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+		   text-transform: uppercase;
+		   letter-spacing: 1px;
+		   animation: shine 2s infinite alternate;
+		}
+
+@keyframes shine {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 100%;
+    }
+}
+        
+        
         /* Dropdown Styles */
         .ms-2{
         	cursor:pointer;
@@ -93,13 +119,12 @@
                     <c:if test="${not empty user}">
 					    <img src="${user.profilePicPath}" alt="Profile" class="profile-pic">
 					    <span class="user-name">${user.firstName} ${user.lastName}</span>
+					  <c:if test="${not empty user.membershipStatus and user.membershipStatus eq 'GOLD'}">
+					    <div class="gold-member-label ms-2">GOLD MEMBER</div>
+					 </c:if>
+
 					</c:if>
-                    
-                    <!--  For user profile and name from user session
-                    <img src="${user.profilePicPath}" alt="Profile" class="profile-pic">
-                    <span class="user-name">${user.firstName} ${user.lastName}</span>
-                     -->
-                    
+				
                     <span class="ms-2" style="color: white;">▼</span> <!-- Dropdown arrow -->
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">

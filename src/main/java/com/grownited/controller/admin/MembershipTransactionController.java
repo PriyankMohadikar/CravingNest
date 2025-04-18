@@ -4,6 +4,9 @@ import com.grownited.dto.PaymentHistoryDTO;
 import com.grownited.entity.MembershipTransactionEntity;
 import com.grownited.entity.UserEntity;
 import com.grownited.repository.MembershipTransactionRepository;
+import com.grownited.repository.UserRepository;
+import com.grownited.service.MailService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,12 @@ public class MembershipTransactionController {
 
     @Autowired
     private MembershipTransactionRepository transactionRepository;
+    
+    @Autowired
+    MailService mailService;
+    
+    @Autowired
+    UserRepository userRepository;
 
     private static final String COUPON_PREFIX = "CN-GOLD-";
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -52,12 +61,12 @@ public class MembershipTransactionController {
     // Handle dummy payment and save transaction (POST)
     @PostMapping("process-payment")
     public String processPayment(
-            @RequestParam("userId") String userId,
+            @RequestParam("userId") Integer userId,
             @RequestParam("email") String email,
             @RequestParam("cardType") String cardType,
             @RequestParam("cardNumber") String cardNumber,
             @RequestParam("cvv") String cvv,
-            Model model) {
+            Model model,HttpSession session) {
 
         // Simulate payment (assume always successful for dummy transaction)
         MembershipTransactionEntity transaction = new MembershipTransactionEntity();
@@ -98,13 +107,22 @@ public class MembershipTransactionController {
         // Save transaction to database
         transactionRepository.save(transaction);
 
+     // Send payment confirmation email
+        UserEntity user = (UserEntity)session.getAttribute("user"); 
+        user.setMembershipStatus("GOLD");
+        userRepository.save(user);
+        String firstName = user.getFirstName();
+        String emaill = user.getEmail();
+        mailService.sendGoldMembershipSuccessEmail(emaill, firstName);
+        
         // Fetch payment history for the user
         List<MembershipTransactionEntity> paymentHistory = transactionRepository.findByUserId(userId);
 
         // Add payment history to model for JSP
         model.addAttribute("paymentHistory", paymentHistory);
         model.addAttribute("dateFormat", DATE_FORMAT);
-//        return "redirect:/home"; // JSP page to display payment history
+        
+        
         return "redirect:/paymenthistory";
 
     }

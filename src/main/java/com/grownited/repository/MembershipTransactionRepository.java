@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface MembershipTransactionRepository extends JpaRepository<MembershipTransactionEntity, Long> {
     
-	List<MembershipTransactionEntity> findByUserId(String userId);
+	List<MembershipTransactionEntity> findByUserId(Integer userId);
     
     
     boolean existsByCouponCode1OrCouponCode2OrCouponCode3(String couponCode1, String couponCode2, String couponCode3);
@@ -22,5 +22,11 @@ public interface MembershipTransactionRepository extends JpaRepository<Membershi
             "JOIN users u ON m.user_id = u.user_id " +
             "WHERE m.user_id = :userId", nativeQuery = true)
     List<PaymentHistoryDTO> getPaymentHistoryByUserId(@Param("userId") Integer userId);
+    
+    
+    boolean existsByUserIdAndPaymentStatus(Integer userId, String paymentStatus);
 }
+
+
+
     
