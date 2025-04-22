@@ -314,6 +314,13 @@ New Entity/table name Booking
                             <option value="8:00 PM">8:00 PM</option>
                         </select>
 
+===============================================
+22/4
+Enchance UI like Add Offer, locations, sidebar, dropdown with CN theme and Related Icons
+And Added Ajax in Add location with state, city and area dynamic loading
+Then Added new Restaurants and Offers
+And Added Delete Functionality For Deleting Expired Offers
+
 
 
 	

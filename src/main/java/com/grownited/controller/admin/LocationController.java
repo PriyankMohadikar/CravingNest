@@ -1,6 +1,7 @@
 package com.grownited.controller.admin;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -112,24 +113,64 @@ public class LocationController {
 // Add by Admin or user/owner
 	@GetMapping("addlocation")
 	public String addfoodandlocationdetails(Model model,HttpSession session) {
+		model.addAttribute("states", staterepo.findAll());
 		model.addAttribute("cities", cityrepo.findAll());
 		model.addAttribute("areas", arearepo.findAll());
 		return "AddLocation";
 	}
 
-	// save details
+//	// save details
+//	@PostMapping("savelocation")
+//	public String savefoodandlocationdetails(LocationEntity locationentity, MultipartFile foodPic) {
+//		try {
+//			Map result = cloudinary.uploader().upload(foodPic.getBytes(), ObjectUtils.emptyMap());
+//			locationentity.setFoodPicPath(result.get("url").toString());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		locationentity.setActive(false); // Set active to false by default
+//		locationrepo.save(locationentity);
+//		return "redirect:/addlocation";
+//	}
+	
 	@PostMapping("savelocation")
-	public String savefoodandlocationdetails(LocationEntity locationentity, MultipartFile foodPic) {
-		try {
-			Map result = cloudinary.uploader().upload(foodPic.getBytes(), ObjectUtils.emptyMap());
-			locationentity.setFoodPicPath(result.get("url").toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public String saveFoodAndLocationDetails(
+	        @RequestParam("title") String title,
+	        @RequestParam("category") String category,
+	        @RequestParam("foodType") String foodType,
+	        @RequestParam("description") String description,
+	        @RequestParam("timings") String timings,
+	        @RequestParam("contactNumber") String contactNumber,
+	        @RequestParam("address") String address,
+	        @RequestParam("cityId") Integer cityId,
+	        @RequestParam("areaId") Integer areaId,
+	        @RequestParam(value = "foodPic", required = false) MultipartFile foodPic) {
+	    
+	    LocationEntity locationEntity = new LocationEntity();
+	    locationEntity.setTitle(title);
+	    locationEntity.setCategory(category);
+	    locationEntity.setFoodType(foodType);
+	    locationEntity.setDescription(description);
+	    locationEntity.setTimings(timings);
+	    locationEntity.setContactNumber(contactNumber);
+	    locationEntity.setAddress(address);
+	    locationEntity.setCityId(cityId);
+	    locationEntity.setAreaId(areaId);
+	    locationEntity.setActive(false); // Set active to false by default
+	    locationEntity.setCreatedDate(new Date()); // Set current date
 
-		locationentity.setActive(false); // Set active to false by default
-		locationrepo.save(locationentity);
-		return "redirect:/addlocation";
+	    if (foodPic != null && !foodPic.isEmpty()) {
+	        try {
+	            Map result = cloudinary.uploader().upload(foodPic.getBytes(), ObjectUtils.emptyMap());
+	            locationEntity.setFoodPicPath(result.get("url").toString());
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    locationrepo.save(locationEntity);
+	    return "redirect:/addlocation";
 	}
 
 	// Active or Inactive by admin

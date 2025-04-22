@@ -84,6 +84,10 @@
                                                         </c:choose>
                                                     </button>
                                                 </form>
+                                                <form action="deleteoffer" method="post" style="display: inline;">
+                                                    <input type="hidden" name="offerId" value="${offer[8]}">
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </c:forEach>

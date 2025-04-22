@@ -7,7 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
 <style>
+
         /* Navbar Styles */
         .navbar-brand {
             font-size: 28px;
@@ -127,20 +130,18 @@
 				
                     <span class="ms-2" style="color: white;">▼</span> <!-- Dropdown arrow -->
                 </div>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                    <!-- Add more dropdown items here later -->
-					<li><a class="dropdown-item" href="userfoodofferinterest">Food Interest</a></li>
-                    <li><a class="dropdown-item" href="viewbookinghistory">Booking data</a></li>
-                    <li><a class="dropdown-item" href="paymenthistory">Payment History</a></li>
-                    <li><a class="dropdown-item" href="purchasemembership">Buy Gold MemberShip</a></li>
-                    <li><a class="dropdown-item" href="edituser?userId=${user.userId }">Edit Profile</a></li>
-                    <li><a class="dropdown-item" href="viewuser?userId=${user.userId }">View Data</a></li>
-                    <li><a class="dropdown-item" href="addlocation">Add Restaurants</a></li>
-                    <li><a class="dropdown-item" href="addoffer">Add offers</a></li>
-                    <li><a class="dropdown-item" href="logout">Logout</a></li>
-                    
-                    
-                </ul>
+               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+				   <li><a class="dropdown-item" href="userfoodofferinterest"><i class="bi bi-heart-fill me-2 text-warning"></i>Food Interest</a></li>
+				   <li><a class="dropdown-item" href="viewbookinghistory"><i class="bi bi-calendar-check-fill me-2 text-success"></i>Booking Data</a></li>
+				   <li><a class="dropdown-item" href="paymenthistory"><i class="bi bi-cash-coin me-2 text-info"></i>Payment History</a></li>
+				   <li><a class="dropdown-item" href="purchasemembership"><i class="bi bi-star-fill me-2 text-warning"></i>Buy Gold Membership</a></li>
+				   <li><a class="dropdown-item" href="edituser?userId=${user.userId}"><i class="bi bi-pencil-square me-2 text-primary"></i>Edit Profile</a></li>
+				   <li><a class="dropdown-item" href="viewuser?userId=${user.userId}"><i class="bi bi-person-lines-fill me-2 text-secondary"></i>View Data</a></li>
+				    <li><a class="dropdown-item" href="addlocation"><i class="bi bi-geo-alt-fill me-2 text-danger"></i>Add Restaurants</a></li>
+				    <li><a class="dropdown-item" href="addoffer"><i class="bi bi-megaphone-fill me-2 text-warning"></i>Add Offers</a></li>
+				    <li><a class="dropdown-item" href="logout"><i class="bi bi-box-arrow-right me-2 text-danger"></i>Logout</a></li>
+				</ul>
+
             </li>
         </ul>
     </div>

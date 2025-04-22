@@ -30,6 +30,8 @@ import com.grownited.repository.OfferRepository;
 import com.grownited.repository.RatingRepository;
 import com.grownited.repository.StateRepository;
 import com.grownited.service.MailService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class OfferController {
@@ -140,6 +142,13 @@ public class OfferController {
 		return "ListRestoOffers";
 	}
 
+	// Delete Offer From Admin side
+	@PostMapping("deleteoffer")
+	public String deleteOfferFromAdmin(Integer offerId) {
+		repooffer.deleteById(offerId);
+		return "redirect:/listrestooffers";
+	}
+	
 	// Toggle for Active/inActive
 	// and mail sending to user based on when offer is active
 	@PostMapping("toggleOfferStatus")

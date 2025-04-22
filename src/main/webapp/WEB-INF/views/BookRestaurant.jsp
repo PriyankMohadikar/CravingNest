@@ -61,9 +61,10 @@
             background-color: #fff;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        
         .category-text {
             font-size: 0.9rem;
-            color: #fff;
+            color: #333;
             margin-bottom: 10px;
         }
         body.dark-mode .details-card {
@@ -71,9 +72,11 @@
             border-color: #444;
         }
         body.dark-mode .category-text {
-            background-color: #2c2c2c;
-            border-color: #444;
-        }
+		    background-color: #2c2c2c;
+		    border-color: #444;
+		    color: #f0f0f0; /* <-- Add this line */
+	}
+
         
         .details-card:hover {
             transform: translateY(-5px);
